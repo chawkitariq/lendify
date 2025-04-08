@@ -1,0 +1,5 @@
+<main>
+    @for (item of items(); track item.id) {
+    <a [routerLink]="item.id.toString()">{{ item.title }}</a>
+    }
+</main>
