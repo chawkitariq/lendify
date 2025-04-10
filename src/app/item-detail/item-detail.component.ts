@@ -5,8 +5,8 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { ItemService } from '../item.service';
-import { Item } from '../item.type';
+import { ItemService } from '../item/item.service';
+import { Item } from '../item/item.type';
 
 @Component({
   selector: 'app-item-detail-page',

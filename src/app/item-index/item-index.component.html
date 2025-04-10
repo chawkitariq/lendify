@@ -1,5 +1,12 @@
 <main>
+  <button (click)="handleCreatePage()">Nouveau</button>
+
+  <ul>
     @for (item of items(); track item.id) {
-    <a [routerLink]="item.id.toString()">{{ item.title }}</a>
+    <li>
+      <a [routerLink]="item.id.toString()">{{ item.title }} </a>
+      <button (click)="handleDeleteItem(item.id)">x</button>
+    </li>
     }
+  </ul>
 </main>
