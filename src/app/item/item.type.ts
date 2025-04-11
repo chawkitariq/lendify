@@ -14,11 +14,11 @@ export type Item = {
     returnAt?: string
   }
 
-  export type ToFormControl<T> = {
+  export type ToFormGroup<T> = {
     [K in keyof T]-?: FormControl<T[K]>
   };
 
-  type d = ToFormControl<ItemCreatePayload>
+  type d = ToFormGroup<ItemCreatePayload>
 
 
 export type ApiResponse<T> = {

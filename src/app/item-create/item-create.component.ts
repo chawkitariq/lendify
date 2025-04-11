@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,22 +6,23 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import { ItemCreatePayload, ToFormControl } from '../item/item.type';
+import { ItemCreatePayload, ToFormGroup } from '../item/item.type';
 import { Router } from '@angular/router';
+import { ItemFormComponent } from '../item-form/item-form.component';
 
 @Component({
   selector: 'app-item-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ItemFormComponent],
   templateUrl: './item-create.component.html',
   styleUrl: './item-create.component.css',
 })
-export class ItemCreateComponent implements OnInit, OnDestroy {
+export class ItemCreateComponent {
   constructor(
     private readonly itemService: ItemService,
     private readonly router: Router
   ) {}
 
-  form = new FormGroup<ToFormControl<ItemCreatePayload>>({
+  form = new FormGroup<ToFormGroup<ItemCreatePayload>>({
     title: new FormControl('', {
       validators: [Validators.required],
       nonNullable: true,
@@ -36,8 +37,4 @@ export class ItemCreateComponent implements OnInit, OnDestroy {
       this.form.reset();
     });
   }
-
-  ngOnInit(): void {}
-
-  ngOnDestroy(): void {}
 }
