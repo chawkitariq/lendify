@@ -23,8 +23,12 @@ export class ItemIndexComponent {
     });
   }
 
-  handleCreatePage() {
+  handleCreateItem() {
     this.router.navigateByUrl('/items/create');
+  }
+
+  handleUpdateItem(itemId: number) {
+    this.router.navigate(['items', itemId, 'update']);
   }
 
   handleDeleteItem(itemId: number) {

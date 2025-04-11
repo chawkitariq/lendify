@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Item, ApiResponse, ItemCreatePayload } from './item.type';
+import {
+  Item,
+  ApiResponse,
+  ItemCreatePayload,
+  ItemUpdatePayload,
+} from './item.type';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +29,13 @@ export class ItemService {
   public findOne(itemId: number) {
     return this.httpClient.get<ApiResponse<Item>>(
       `http://localhost:8055/items/items/${itemId}`
+    );
+  }
+
+  public update(itemId: number, payload: ItemUpdatePayload) {
+    return this.httpClient.patch<ApiResponse<Item>>(
+      `http://localhost:8055/items/items/${itemId}`,
+      payload
     );
   }
 
