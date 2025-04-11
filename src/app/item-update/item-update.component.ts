@@ -12,7 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import { Item, ItemUpdatePayload, ToFormGroup } from '../item/item.type';
+import { Item, ItemUpdatePayload, ToFormGroup } from '../item/item.interface';
 import { ItemFormComponent } from '../item-form/item-form.component';
 
 @Component({

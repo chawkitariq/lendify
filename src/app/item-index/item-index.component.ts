@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Item } from '../item/item.type';
+import { Item } from '../item/item.interface';
 import { ItemService } from '../item/item.service';
 import { Router, RouterLink } from '@angular/router';
 

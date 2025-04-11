@@ -1,5 +1,5 @@
 import { Component, input, model, OnInit } from '@angular/core';
-import { ItemCreatePayload, ToFormGroup } from '../item/item.type';
+import { ItemCreatePayload, ToFormGroup } from '../item/item.interface';
 import {
   ControlContainer,
   FormGroup,

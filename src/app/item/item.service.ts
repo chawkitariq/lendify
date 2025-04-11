@@ -5,7 +5,7 @@ import {
   ApiResponse,
   ItemCreatePayload,
   ItemUpdatePayload,
-} from './item.type';
+} from './item.interface';
 
 @Injectable({
   providedIn: 'root',

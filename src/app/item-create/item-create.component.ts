@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import { ItemCreatePayload, ToFormGroup } from '../item/item.type';
+import { ItemCreatePayload, ToFormGroup } from '../item/item.interface';
 import { Router } from '@angular/router';
 import { ItemFormComponent } from '../item-form/item-form.component';
 
