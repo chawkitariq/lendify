@@ -1,13 +1,48 @@
-<main>
-  <button (click)="handleCreateItem()">Nouveau</button>
+<main style="max-width: 1200px; margin: auto">
+  <p-button (click)="handleCreateItem()">Nouveau</p-button>
 
-  <ul>
+  <ul
+    style="
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(300px, 1fr));
+      gap: 1rem;
+    "
+  >
     @for (item of items(); track item.id) {
     <li>
-      <a [routerLink]="item.id.toString()">{{ item.title }} </a>
-      <button (click)="handleDeleteItem(item.id)">🗑</button>
-      <button (click)="handleUpdateItem(item.id)">✐</button>
+      <p-card [style]="{ overflow: 'hidden' }">
+        <ng-template #header>
+          <img
+            alt="Card"
+            class="w-full"
+            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+          />
+        </ng-template>
+        <ng-template #title>{{ item.title }}</ng-template>
+        <p>{{ item.description }}</p>
+        <ng-template #footer>
+          <div class="flex gap-4 mt-1">
+            <p-button
+              label="✐"
+              class="w-full"
+              styleClass="w-full"
+              severity="info"
+              (click)="handleUpdateItem(item.id)"
+            />
+            <p-button
+              label="🗑"
+              class="w-full"
+              styleClass="w-full"
+              severity="danger"
+              (click)="handleConfirmDelete(item.id)"
+            />
+          </div>
+        </ng-template>
+      </p-card>
     </li>
     }
   </ul>
+
+  <p-confirmdialog />
 </main>

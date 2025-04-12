@@ -5,10 +5,20 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { DatePickerModule } from 'primeng/datepicker';
+import { TextareaModule } from 'primeng/textarea';
 
 @Component({
   selector: 'app-item-form',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    DatePickerModule,
+    TextareaModule,
+  ],
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.css',
 })

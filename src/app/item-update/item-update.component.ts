@@ -2,8 +2,10 @@ import {
   Component,
   Input,
   numberAttribute,
+  OnChanges,
   OnInit,
   signal,
+  SimpleChanges,
 } from '@angular/core';
 import {
   FormControl,
@@ -40,11 +42,20 @@ export class ItemUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.findOne(this.id).subscribe(({ data }) => {
       this.item.set(data);
-      this.form.patchValue(data);
+      this.form.patchValue({
+        ...data,
+        returnAt: data.returnAt ? new Date(data.returnAt) : undefined,
+      });
     });
   }
 
   handleFormSubmit() {
-    this.itemService.update(this.id, this.form.getRawValue()).subscribe();
+    this.itemService.update(this.id, this.form.value).subscribe(({ data }) => {
+      this.item.set(data);
+      this.form.patchValue({
+        ...data,
+        returnAt: data.returnAt ? new Date(data.returnAt) : undefined,
+      });
+    });
   }
 }

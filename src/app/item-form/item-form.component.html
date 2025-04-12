@@ -1,12 +1,21 @@
-<div [formGroup]="form">
-  <div>
-    <input type="text" formControlName="title" />
+<div [formGroup]="form" style="display: grid; gap: 1rem">
+  <div class="w-full">
+    <input
+      type="text"
+      pInputText
+      formControlName="title"
+      [style]="{ width: '100%' }"
+    />
   </div>
-  <div>
-    <textarea formControlName="description"></textarea>
+  <div class="w-full">
+    <textarea
+      pTextarea
+      formControlName="description"
+      [style]="{ width: '100%' }"
+    ></textarea>
   </div>
-  <div>
-    <input type="date" formControlName="returnAt" />
+  <div class="w-full">
+    <p-datepicker formControlName="returnAt" [style]="{ width: '100%' }" />
   </div>
-  <button type="submit" [disabled]="!form.valid">Enregistrer</button>
+  <p-button type="submit" [disabled]="!form.valid">Enregistrer</p-button>
 </div>
