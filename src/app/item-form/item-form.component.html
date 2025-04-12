@@ -6,6 +6,12 @@
       formControlName="title"
       [style]="{ width: '100%' }"
     />
+    @if (isInvalidControl(form.controls.title)) {
+    <p-message
+      severity="error"
+      [text]="getControlMessage(form.controls.title)"
+    />
+    }
   </div>
   <div class="w-full">
     <textarea
@@ -13,9 +19,21 @@
       formControlName="description"
       [style]="{ width: '100%' }"
     ></textarea>
+    @if (isInvalidControl(form.controls.description)) {
+    <p-message
+      severity="error"
+      [text]="getControlMessage(form.controls.description)"
+    />
+    }
   </div>
   <div class="w-full">
     <p-datepicker formControlName="returnAt" [style]="{ width: '100%' }" />
+    @if (isInvalidControl(form.controls.returnAt)) {
+    <p-message
+      severity="error"
+      [text]="getControlMessage(form.controls.returnAt)"
+    />
+    }
   </div>
   <p-button type="submit" [disabled]="!form.valid">Enregistrer</p-button>
 </div>

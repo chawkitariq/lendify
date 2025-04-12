@@ -9,6 +9,7 @@ import { ItemService } from '../item/item.service';
 import { ItemCreatePayload, ToFormGroup } from '../item/item.interface';
 import { Router } from '@angular/router';
 import { ItemFormComponent } from '../item-form/item-form.component';
+import { setControlMessage } from 'ngx-control-message';
 
 @Component({
   selector: 'app-item-create',
@@ -24,7 +25,7 @@ export class ItemCreateComponent {
 
   form = new FormGroup<ToFormGroup<ItemCreatePayload>>({
     title: new FormControl('', {
-      validators: [Validators.required],
+      validators: [setControlMessage(Validators.required, 'Obligatoire!')],
       nonNullable: true,
     }),
     description: new FormControl('', { nonNullable: true }),

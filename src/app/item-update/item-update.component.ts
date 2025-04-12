@@ -16,6 +16,7 @@ import {
 import { ItemService } from '../item/item.service';
 import { Item, ItemUpdatePayload, ToFormGroup } from '../item/item.interface';
 import { ItemFormComponent } from '../item-form/item-form.component';
+import { setControlMessage } from 'ngx-control-message';
 
 @Component({
   selector: 'app-item-update',
@@ -32,7 +33,7 @@ export class ItemUpdateComponent implements OnInit {
 
   form = new FormGroup<ToFormGroup<ItemUpdatePayload>>({
     title: new FormControl('', {
-      validators: [Validators.required],
+      validators: [setControlMessage(Validators.required, 'Obligatoire!')],
       nonNullable: true,
     }),
     description: new FormControl('', { nonNullable: true }),
