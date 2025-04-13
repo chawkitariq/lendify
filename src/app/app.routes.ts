@@ -3,8 +3,13 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { ItemIndexComponent } from './item-index/item-index.component';
 import { ItemCreateComponent } from './item-create/item-create.component';
 import { ItemUpdateComponent } from './item-update/item-update.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
+  {
+    path: 'connection',
+    component: LoginComponent,
+  },
   {
     path: 'items',
     component: ItemIndexComponent,
