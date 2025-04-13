@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { Item } from '../item/item.interface';
+import { Item } from '../item/item.type';
 import { ItemService } from '../item/item.service';
 import { Router } from '@angular/router';
 import { CardModule } from 'primeng/card';

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Item, ItemCreatePayload, ItemUpdatePayload } from './item.interface';
-import { ApiResponse } from '../app.interface';
+import { Item, ItemCreatePayload, ItemUpdatePayload } from './item.type';
+import { ApiResponse } from '../app.type';
 
 @Injectable({
   providedIn: 'root',

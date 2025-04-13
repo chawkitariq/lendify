@@ -6,11 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import { ItemCreatePayload } from '../item/item.interface';
+import { ItemCreatePayload } from '../item/item.type';
 import { Router } from '@angular/router';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { setControlMessage } from 'ngx-control-message';
-import { ToFormGroup } from '../app.interface';
+import { ToFormGroup } from '../app.type';
 
 @Component({
   selector: 'app-item-create',
