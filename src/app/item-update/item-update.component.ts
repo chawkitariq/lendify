@@ -50,10 +50,7 @@ export class ItemUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.findOne(this.id).subscribe(({ data }) => {
       this.item.set(data);
-      this.form.patchValue({
-        ...data,
-        returnAt: data.returnAt ? new Date(data.returnAt) : undefined,
-      });
+      this.form.patchValue(data);
     });
   }
 
@@ -61,10 +58,7 @@ export class ItemUpdateComponent implements OnInit {
     this.itemService.update(this.id, this.form.value).subscribe({
       next: ({ data }) => {
         this.item.set(data);
-        this.form.patchValue({
-          ...data,
-          returnAt: data.returnAt ? new Date(data.returnAt) : undefined,
-        });
+        this.form.patchValue(data);
         this.messageService.add({
           severity: 'success',
           summary: 'Mise à jour effectuée',
