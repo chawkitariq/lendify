@@ -1,8 +1,10 @@
+<p-toast />
 <main style="max-width: 1200px; margin: auto">
   <p-button (click)="handleCreateItem()">Nouveau</p-button>
 
   <ul
     style="
+      padding: 0;
       list-style: none;
       display: grid;
       grid-template-columns: repeat(3, minmax(300px, 1fr));
@@ -11,7 +13,7 @@
   >
     @for (item of items(); track item.id) {
     <li>
-      <p-card [style]="{ overflow: 'hidden' }">
+      <p-card [style]="{ overflow: 'hidden', height: '100%' }">
         <ng-template #header>
           <img
             alt="Card"

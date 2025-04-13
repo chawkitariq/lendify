@@ -1,7 +1,9 @@
 <div [formGroup]="form" style="display: grid; gap: 1rem">
-  <div class="w-full">
+  <div class="w-full" style="display: grid; gap: 0.5em">
+    <label for="title">Titre</label>
     <input
       type="text"
+      id="title"
       pInputText
       formControlName="title"
       [style]="{ width: '100%' }"
@@ -13,11 +15,14 @@
     />
     }
   </div>
-  <div class="w-full">
+  <div class="w-full" style="display: grid; gap: 0.5em">
+    <label for="description">Description</label>
     <textarea
+      id="description"
       pTextarea
+      rows="20"
       formControlName="description"
-      [style]="{ width: '100%' }"
+      [style]="{ width: '100%', resize: 'vertical' }"
     ></textarea>
     @if (isInvalidControl(form.controls.description)) {
     <p-message
@@ -26,8 +31,13 @@
     />
     }
   </div>
-  <div class="w-full">
-    <p-datepicker formControlName="returnAt" [style]="{ width: '100%' }" />
+  <div class="w-full" style="display: grid; gap: 0.5em">
+    <label for="returnAt">Date de retour</label>
+    <p-datepicker
+      id="returnAt"
+      formControlName="returnAt"
+      [style]="{ width: '100%' }"
+    />
     @if (isInvalidControl(form.controls.returnAt)) {
     <p-message
       severity="error"

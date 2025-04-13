@@ -1,3 +1,8 @@
-<form [formGroup]="form" (submit)="handleFormSubmit()">
+<p-toast />
+<form
+  [formGroup]="form"
+  (submit)="handleFormSubmit()"
+  style="max-width: 600px; margin: auto"
+>
   <app-item-form />
 </form>

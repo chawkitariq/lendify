@@ -1,5 +1,5 @@
 import { Component, input, model, OnInit } from '@angular/core';
-import { ItemCreatePayload, ToFormGroup } from '../item/item.interface';
+import { ItemCreatePayload } from '../item/item.interface';
 import {
   AbstractControl,
   ControlContainer,
@@ -12,6 +12,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { TextareaModule } from 'primeng/textarea';
 import { MessageModule } from 'primeng/message';
 import { getControlMessage } from 'ngx-control-message';
+import { ToFormGroup } from '../app.interface';
 
 @Component({
   selector: 'app-item-form',
