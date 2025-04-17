@@ -7,12 +7,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { dateInterceptor } from './interceptors/date/date.interceptor';
+import { accessTokenInterceptor } from './interceptors/access-token/access-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(withInterceptors([dateInterceptor])),
+    provideHttpClient(
+      withInterceptors([accessTokenInterceptor, dateInterceptor])
+    ),
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
