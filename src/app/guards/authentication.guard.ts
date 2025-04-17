@@ -1,12 +1,12 @@
 import { inject } from '@angular/core';
 import { CanActivateChildFn, Router } from '@angular/router';
-import { AuthenticationStateService } from '../authentication-state/authentication-state.service';
+import { AuthenticationStoreService } from '../authentication-store/authentication-store.service';
 
 export const authenticationGuard: CanActivateChildFn = (childRoute, state) => {
-  const authenticationStateService = inject(AuthenticationStateService);
+  const authenticationStoreService = inject(AuthenticationStoreService);
   const router = inject(Router);
 
-  if (!authenticationStateService.isAuthenticated()) {
+  if (!authenticationStoreService.isAuthenticated()) {
     return router.parseUrl('/connection');
   }
 

@@ -14,7 +14,7 @@ import { getControlMessage, setControlMessage } from 'ngx-control-message';
 import { MessageModule } from 'primeng/message';
 import { isInvalidControl } from '../utils/app.util';
 import { AuthenticationService } from '../authentication/authentication.service';
-import { AuthenticationStateService } from '../authentication-state/authentication-state.service';
+import { AuthenticationStoreService } from '../authentication-store/authentication-store.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -32,7 +32,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(
     private readonly authenticationService: AuthenticationService,
-    private readonly authenticationStateService: AuthenticationStateService,
+    private readonly authenticationStoreService: AuthenticationStoreService,
     private readonly router: Router
   ) {}
 
@@ -57,7 +57,7 @@ export class LoginComponent {
     this.authenticationService
       .login(this.form.getRawValue())
       .subscribe(({ data }) => {
-        this.authenticationStateService.login(data);
+        this.authenticationStoreService.login(data);
         this.router.navigateByUrl('/items');
       });
   }

@@ -3,7 +3,7 @@ import { Toolbar } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Router, RouterOutlet } from '@angular/router';
-import { AuthenticationStateService } from './authentication-state/authentication-state.service';
+import { AuthenticationStoreService } from './authentication-store/authentication-store.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +15,12 @@ export class AppComponent {
   title = 'lendify';
 
   constructor(
-    private readonly authenticationStateService: AuthenticationStateService,
+    private readonly authenticationStoreService: AuthenticationStoreService,
     private readonly router: Router
   ) {}
 
   logout() {
-    this.authenticationStateService.logout();
+    this.authenticationStoreService.logout();
     this.router.navigateByUrl('/connection');
   }
 }

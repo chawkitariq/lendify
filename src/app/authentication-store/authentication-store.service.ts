@@ -1,5 +1,5 @@
 import { computed, Injectable } from '@angular/core';
-import { AuthenticationState } from './authentication-state.type';
+import { AuthenticationStore } from './authentication-store.type';
 import { signalPersistor } from '../utils/state.util';
 
 const initialState = {
@@ -11,8 +11,8 @@ const initialState = {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationStateService {
-  state = signalPersistor<AuthenticationState>(
+export class AuthenticationStoreService {
+  state = signalPersistor<AuthenticationStore>(
     'authentication',
     initialState,
     localStorage
@@ -21,7 +21,7 @@ export class AuthenticationStateService {
   accessToken = computed(() => this.state().access_token);
   isAuthenticated = computed(() => Boolean(this.state().access_token));
 
-  login(payload: AuthenticationState) {
+  login(payload: AuthenticationStore) {
     this.state.set(payload);
   }
 
