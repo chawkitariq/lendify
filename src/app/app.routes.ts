@@ -4,31 +4,38 @@ import { ItemIndexComponent } from './item-index/item-index.component';
 import { ItemCreateComponent } from './item-create/item-create.component';
 import { ItemUpdateComponent } from './item-update/item-update.component';
 import { LoginComponent } from './login/login.component';
+import { authenticationGuard } from './guards/authentication.guard';
 
 export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/items',
+    pathMatch: 'full',
+  },
   {
     path: 'connection',
     component: LoginComponent,
   },
   {
-    path: 'items',
-    component: ItemIndexComponent,
-  },
-  {
-    path: 'items/create',
-    component: ItemCreateComponent,
-  },
-  {
-    path: 'items/:id',
-    component: ItemDetailComponent,
-  },
-  {
-    path: 'items/:id/update',
-    component: ItemUpdateComponent,
-  },
-  {
     path: '',
-    redirectTo: '/items',
-    pathMatch: 'full',
+    canActivateChild: [authenticationGuard],
+    children: [
+      {
+        path: 'items',
+        component: ItemIndexComponent,
+      },
+      {
+        path: 'items/create',
+        component: ItemCreateComponent,
+      },
+      {
+        path: 'items/:id',
+        component: ItemDetailComponent,
+      },
+      {
+        path: 'items/:id/update',
+        component: ItemUpdateComponent,
+      },
+    ],
   },
 ];

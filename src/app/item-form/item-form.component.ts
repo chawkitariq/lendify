@@ -13,6 +13,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { MessageModule } from 'primeng/message';
 import { getControlMessage } from 'ngx-control-message';
 import { ToFormGroup } from '../app.type';
+import { isInvalidControl } from '../utils/app.util';
 
 @Component({
   selector: 'app-item-form',
@@ -33,14 +34,11 @@ export class ItemFormComponent implements OnInit {
   constructor(private readonly controlContainer: ControlContainer) {}
 
   getControlMessage = getControlMessage;
+  isInvalidControl = isInvalidControl;
 
   ngOnInit(): void {
     this.form = this.controlContainer.control as FormGroup<
       ToFormGroup<ItemCreatePayload>
     >;
-  }
-
-  isInvalidControl(control: AbstractControl) {
-    return control.invalid && (control.dirty || control.touched);
   }
 }
