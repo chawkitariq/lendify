@@ -1,4 +1,4 @@
-import { signal, Signal, WritableSignal } from '@angular/core';
+import { effect, signal, WritableSignal } from '@angular/core';
 
 /**
  * Interface for storage implementations
@@ -23,43 +23,26 @@ export function signalPersistor<T>(
 ): WritableSignal<T> {
   const storedValue = storageImpl.getItem(key);
 
-  let state: T;
-  try {
-    state = storedValue ? JSON.parse(storedValue) : initialState;
-  } catch (e) {
-    throw new Error(`Error parsing stored value for key "${key}":`);
+  let state: T = initialState;
+
+  if (storedValue) {
+    try {
+      state = JSON.parse(storedValue) as T;
+    } catch (e) {
+      throw new Error(`Failed to parse stored value for key "${key}"`);
+    }
   }
 
   const signalState = signal<T>(state);
 
-  /**
-   * @throws Will throw an error if the value cannot be serialized
-   */
-  const persistToStorage = (value: T) => {
-    try {
-      storageImpl.setItem(key, JSON.stringify(value));
-    } catch (e) {
-      throw e;
+  effect(() => {
+    const currentValue = signalState();
+    const stored = storageImpl.getItem(key);
+
+    if (stored !== JSON.stringify(currentValue)) {
+      storageImpl.setItem(key, JSON.stringify(currentValue));
     }
-  };
+  });
 
-  const persistentSignal = function () {
-    return signalState();
-  } as WritableSignal<T>;
-
-  persistentSignal.set = (value: T) => {
-    signalState.set(value);
-    persistToStorage(value);
-  };
-
-  persistentSignal.update = (updateFn: (value: T) => T) => {
-    signalState.update(updateFn);
-    persistToStorage(signalState());
-  };
-
-  if (!storedValue) {
-    persistToStorage(initialState);
-  }
-
-  return persistentSignal;
+  return signalState;
 }
