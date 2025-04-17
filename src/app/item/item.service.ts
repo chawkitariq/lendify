@@ -28,6 +28,12 @@ export class ItemService {
     );
   }
 
+  public findByTitle(title: string) {
+    return this.httpClient.get<ApiResponse<Item[]>>(
+      `http://localhost:8055/items/items?filter[title][_eq]=${title}`
+    );
+  }
+
   public update(itemId: number, payload: ItemUpdatePayload) {
     return this.httpClient.patch<ApiResponse<Item>>(
       `http://localhost:8055/items/items/${itemId}`,

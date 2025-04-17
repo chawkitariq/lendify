@@ -9,8 +9,9 @@ import { ItemService } from '../item/item.service';
 import { ItemCreatePayload } from '../item/item.type';
 import { Router } from '@angular/router';
 import { ItemFormComponent } from '../item-form/item-form.component';
-import { setControlMessage } from 'ngx-control-message';
+import { setAsyncControlMessage, setControlMessage } from 'ngx-control-message';
 import { ToFormGroup } from '../app.type';
+import { itemTitleExistsValidator } from '../validators/item-title-exists.validator';
 
 @Component({
   selector: 'app-item-create',
@@ -27,6 +28,13 @@ export class ItemCreateComponent {
   form = new FormGroup<ToFormGroup<ItemCreatePayload>>({
     title: new FormControl('', {
       validators: [setControlMessage(Validators.required, 'Obligatoire!')],
+      asyncValidators: [
+        setAsyncControlMessage(
+          itemTitleExistsValidator(),
+          'Le titre existe déjà !'
+        ),
+      ],
+      updateOn: 'blur',
       nonNullable: true,
     }),
     description: new FormControl('', { nonNullable: true }),
