@@ -9,6 +9,7 @@ import Aura from '@primeng/themes/aura';
 import { dateInterceptor } from './interceptors/date/date.interceptor';
 import { accessTokenInterceptor } from './interceptors/access-token/access-token.interceptor';
 import { refreshTokenInterceptor } from './interceptors/refresh-token/refresh-token.interceptor';
+import { logoutOnUnauthorizedInterceptor } from './interceptors/logout-on-unauthorized/logout-on-unauthorized.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([
         accessTokenInterceptor,
         refreshTokenInterceptor,
+        logoutOnUnauthorizedInterceptor,
         dateInterceptor,
       ])
     ),
