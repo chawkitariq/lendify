@@ -4,6 +4,13 @@ export type ToFormGroup<T> = {
   [K in keyof T]-?: FormControl<T[K]>;
 };
 
+export type ApiErrorResponse = {
+  errors: {
+    message: string;
+    extension: { code: string };
+  }[];
+};
+
 export type ApiResponse<T> = {
   data: T;
 };

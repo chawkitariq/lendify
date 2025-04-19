@@ -10,7 +10,7 @@
           <img
             alt="Card"
             class="object-cover"
-            src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
+            [src]="getItemImageUrl(item)"
           />
         </ng-template>
         <ng-template #title>{{ item.title }}</ng-template>

@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-item',
@@ -56,6 +57,12 @@ export class ItemIndexComponent {
           life: 3000,
         }),
     });
+  }
+
+  getItemImageUrl(item: Item) {
+    return item?.image
+      ? `${environment.apiUrl}/assets/${item?.image}`
+      : environment.defaultItemImage;
   }
 
   handleConfirmDelete(itemId: number) {
