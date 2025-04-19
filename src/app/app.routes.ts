@@ -5,6 +5,7 @@ import { ItemCreateComponent } from './item-create/item-create.component';
 import { ItemUpdateComponent } from './item-update/item-update.component';
 import { LoginComponent } from './login/login.component';
 import { authenticationGuard } from './guards/authentication.guard';
+import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
   },
   {
     path: '',
+    component: AuthLayoutComponent,
     canActivateChild: [authenticationGuard],
     children: [
       {

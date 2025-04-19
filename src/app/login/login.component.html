@@ -26,6 +26,7 @@
       />
       }
     </div>
+
     <div class="grid gap-2">
       <label for="password">Mot de passe</label>
       <input
@@ -42,11 +43,13 @@
       />
       }
     </div>
+
     <p-button
       label="Login"
       styleClass="w-full mt-4"
       type="submit"
-      [disabled]="form.invalid"
+      [loading]="isLoading()"
+      [disabled]="form.invalid || isLoading()"
     />
   </form>
 </div>

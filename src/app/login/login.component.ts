@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
@@ -39,6 +39,8 @@ export class LoginComponent {
   getControlMessage = getControlMessage;
   isInvalidControl = isInvalidControl;
 
+  isLoading = signal(false);
+
   form = new FormGroup<ToFormGroup<AuthenticationLoginPayload>>({
     email: new FormControl('', {
       validators: [
@@ -54,12 +56,15 @@ export class LoginComponent {
   });
 
   handleSubmit() {
+    this.isLoading.set(true);
     this.authenticationService.login(this.form.getRawValue()).subscribe({
       next: ({ data }) => {
+        this.isLoading.set(false);
         this.authenticationStoreService.login(data);
         this.router.navigateByUrl('/items');
       },
       error: ({ error }) => {
+        this.isLoading.set(false);
         this.form.setErrors({
           server: error.errors.map((e: any) => e.message).join(', '),
         });

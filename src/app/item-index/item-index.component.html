@@ -1,23 +1,15 @@
 <p-toast />
-<main style="max-width: 1200px; margin: auto">
-  <p-button (click)="handleCreateItem()">Nouveau</p-button>
+<main class="max-w-7xl mx-auto px-4 grid gap-4">
+  <p-button class="ml-auto" (click)="handleCreateItem()">Nouveau</p-button>
 
-  <ul
-    style="
-      padding: 0;
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(300px, 1fr));
-      gap: 1rem;
-    "
-  >
+  <ul class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
     @for (item of items(); track item.id) {
     <li>
-      <p-card [style]="{ overflow: 'hidden', height: '100%' }">
+      <p-card class="h-full overflow-hidden">
         <ng-template #header>
           <img
             alt="Card"
-            class="w-full"
+            class="object-cover"
             src="https://primefaces.org/cdn/primeng/images/card-ng.jpg"
           />
         </ng-template>
