@@ -1,20 +1,52 @@
 <div class="h-screen grid place-items-center p-4">
-  <form class="w-full md:w-3/12 grid gap-4" [formGroup]="form" (submit)="handleSubmit()">
+  <form
+    class="w-full md:w-3/12 grid gap-4"
+    [formGroup]="form"
+    (submit)="handleSubmit()"
+  >
     <h1 class="text-3xl mb-8 text-center">Connection</h1>
+
+    @if (form.hasError('server')) {
+    <p-message severity="error" [text]="form.getError('server')" />
+    }
+
     <div class="grid gap-2">
       <label for="email">Email</label>
-      <input pInputText id="email" type="text" formControlName="email" placeholder="admin@email.com" />
+      <input
+        pInputText
+        id="email"
+        type="text"
+        formControlName="email"
+        placeholder="admin@email.com"
+      />
       @if (isInvalidControl(form.controls.email)) {
-      <p-message severity="error" [text]="getControlMessage(form.controls.email)" />
+      <p-message
+        severity="error"
+        [text]="getControlMessage(form.controls.email)"
+      />
       }
     </div>
     <div class="grid gap-2">
       <label for="password">Mot de passe</label>
-      <input pInputText id="password" type="password" formControlName="password" placeholder="password" />
+      <input
+        pInputText
+        id="password"
+        type="password"
+        formControlName="password"
+        placeholder="password"
+      />
       @if (isInvalidControl(form.controls.password)) {
-      <p-message severity="error" [text]="getControlMessage(form.controls.password)" />
+      <p-message
+        severity="error"
+        [text]="getControlMessage(form.controls.password)"
+      />
       }
     </div>
-    <p-button label="Login" styleClass="w-full mt-4" type="submit" [disabled]="form.invalid" />
+    <p-button
+      label="Login"
+      styleClass="w-full mt-4"
+      type="submit"
+      [disabled]="form.invalid"
+    />
   </form>
 </div>

@@ -54,11 +54,16 @@ export class LoginComponent {
   });
 
   handleSubmit() {
-    this.authenticationService
-      .login(this.form.getRawValue())
-      .subscribe(({ data }) => {
+    this.authenticationService.login(this.form.getRawValue()).subscribe({
+      next: ({ data }) => {
         this.authenticationStoreService.login(data);
         this.router.navigateByUrl('/items');
-      });
+      },
+      error: ({ error }) => {
+        this.form.setErrors({
+          server: error.errors.map((e: any) => e.message).join(', '),
+        });
+      },
+    });
   }
 }
