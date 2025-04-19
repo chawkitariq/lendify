@@ -6,9 +6,11 @@ export const accessTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authenticationStoreService = inject(AuthenticationStoreService);
   const accessToken = authenticationStoreService.accessToken();
 
-  const newReq = req.clone({
-    headers: req.headers.append('Authorization', `Bearer ${accessToken}`),
-  }); 
+  const newReq = req.clone();
+
+  if (authenticationStoreService.isAuthenticated()) {
+    newReq.headers.set('Authorization', `Bearer ${accessToken}`);
+  }
 
   return next(newReq);
 };
