@@ -11,7 +11,13 @@ export type ItemCreatePayload = {
   title: string;
   description?: string;
   returnAt?: Date;
-  file?: File | string;
+  file?: string;
 };
 
 export type ItemUpdatePayload = Partial<ItemCreatePayload>;
+
+export type ItemFormCreatePayload = Omit<ItemCreatePayload, 'file'> & {
+  file?: File | string;
+};
+
+export type ItemFormUpdatePayload = Partial<ItemFormCreatePayload>;

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Item, ItemCreatePayload, ItemUpdatePayload } from './item.type';
+import { Item, ItemCreatePayload, ItemUpdatePayload } from './item.interface';
 import { ApiResponse } from '../app.type';
 import { environment } from '../../environments/environment';
 

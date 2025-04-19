@@ -6,7 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { ItemService } from '../item/item.service';
-import { Item } from '../item/item.type';
+import { Item } from '../item/item.interface';
 
 @Component({
   selector: 'app-item-detail-page',

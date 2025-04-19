@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ItemCreatePayload } from '../item/item.type';
+import {
+  ItemCreatePayload,
+  ItemFormCreatePayload,
+  ItemFormUpdatePayload,
+} from '../item/item.interface';
 import {
   ControlContainer,
   FormGroup,
@@ -36,7 +40,7 @@ import { isInvalidControl } from '../utils/app.util';
   ],
 })
 export class ItemFormComponent implements OnInit {
-  form!: FormGroup<ToFormGroup<ItemCreatePayload>>;
+  form!: FormGroup<ToFormGroup<ItemFormCreatePayload | ItemFormUpdatePayload>>;
 
   constructor(private readonly controlContainer: ControlContainer) {}
 
@@ -45,7 +49,7 @@ export class ItemFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.controlContainer.control as FormGroup<
-      ToFormGroup<ItemCreatePayload>
+      ToFormGroup<ItemFormCreatePayload | ItemFormUpdatePayload>
     >;
   }
 
@@ -53,10 +57,10 @@ export class ItemFormComponent implements OnInit {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-      this.form.get('file')?.setValue(file); 
+      this.form.get('file')?.setValue(file);
     }
   }
-  
+
   getFileUrl(): string | undefined {
     const file = this.form.get('file')?.value;
     return file instanceof Blob ? URL.createObjectURL(file) : file;

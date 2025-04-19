@@ -20,5 +20,5 @@ export type File = {
 };
 
 export type FileUploadPayload = Partial<File> & {
-  file: File;
+  file: Blob;
 };

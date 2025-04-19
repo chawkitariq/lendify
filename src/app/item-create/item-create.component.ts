@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import { ItemCreatePayload } from '../item/item.type';
+import { ItemCreatePayload } from '../item/item.interface';
 import { Router } from '@angular/router';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { setAsyncControlMessage, setControlMessage } from 'ngx-control-message';
