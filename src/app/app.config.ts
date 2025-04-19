@@ -8,13 +8,18 @@ import { providePrimeNG } from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import { dateInterceptor } from './interceptors/date/date.interceptor';
 import { accessTokenInterceptor } from './interceptors/access-token/access-token.interceptor';
+import { refreshTokenInterceptor } from './interceptors/refresh-token/refresh-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
-      withInterceptors([accessTokenInterceptor, dateInterceptor])
+      withInterceptors([
+        accessTokenInterceptor,
+        refreshTokenInterceptor,
+        dateInterceptor,
+      ])
     ),
     provideAnimationsAsync(),
     providePrimeNG({
