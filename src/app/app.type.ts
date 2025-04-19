@@ -11,6 +11,10 @@ export type ApiErrorResponse = {
   }[];
 };
 
+export type HttpClientErrorResponse<T> = {
+  error: T;
+};
+
 export type ApiResponse<T> = {
   data: T;
 };

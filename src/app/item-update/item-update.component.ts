@@ -2,10 +2,8 @@ import {
   Component,
   Input,
   numberAttribute,
-  OnChanges,
   OnInit,
   signal,
-  SimpleChanges,
 } from '@angular/core';
 import {
   FormControl,
@@ -19,7 +17,13 @@ import { ItemFormComponent } from '../item-form/item-form.component';
 import { setControlMessage } from 'ngx-control-message';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-import { ToFormGroup } from '../app.type';
+import {
+  ApiErrorResponse,
+  HttpClientErrorResponse,
+  ToFormGroup,
+} from '../app.type';
+import { environment } from '../../environments/environment';
+import { extractApiErrorMessage } from '../utils/error.util';
 
 @Component({
   selector: 'app-item-update',
@@ -51,7 +55,10 @@ export class ItemUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.itemService.findOne(this.id).subscribe(({ data }) => {
       this.item.set(data);
-      this.form.patchValue(data);
+      this.form.patchValue({
+        ...data,
+        file: `${environment.apiUrl}/assets/${data.image}`,
+      });
     });
   }
 
@@ -66,12 +73,14 @@ export class ItemUpdateComponent implements OnInit {
           life: 3000,
         });
       },
-      error: () =>
+      error: ({ error }: HttpClientErrorResponse<ApiErrorResponse>) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Mise à jour échouer',
+          detail: extractApiErrorMessage(error),
           life: 3000,
-        }),
+        });
+      },
     });
   }
 }

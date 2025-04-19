@@ -11,7 +11,7 @@ export type ItemCreatePayload = {
   title: string;
   description?: string;
   returnAt?: Date;
-  file?: File;
+  file?: File | string;
 };
 
 export type ItemUpdatePayload = Partial<ItemCreatePayload>;
