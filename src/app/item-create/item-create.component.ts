@@ -39,6 +39,7 @@ export class ItemCreateComponent {
     }),
     description: new FormControl('', { nonNullable: true }),
     returnAt: new FormControl(undefined, { nonNullable: true }),
+    file: new FormControl(undefined, { nonNullable: true }),
   });
 
   handleFormSubmit() {

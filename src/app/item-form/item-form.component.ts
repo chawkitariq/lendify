@@ -1,7 +1,6 @@
-import { Component, input, model, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ItemCreatePayload } from '../item/item.type';
 import {
-  AbstractControl,
   ControlContainer,
   FormGroup,
   ReactiveFormsModule,
@@ -11,12 +10,18 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DatePickerModule } from 'primeng/datepicker';
 import { TextareaModule } from 'primeng/textarea';
 import { MessageModule } from 'primeng/message';
+import { PopoverModule } from 'primeng/popover';
+import { ImageModule } from 'primeng/image';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { getControlMessage } from 'ngx-control-message';
 import { ToFormGroup } from '../app.type';
 import { isInvalidControl } from '../utils/app.util';
 
 @Component({
   selector: 'app-item-form',
+  templateUrl: './item-form.component.html',
+  styleUrl: './item-form.component.css',
   imports: [
     ReactiveFormsModule,
     ButtonModule,
@@ -24,9 +29,11 @@ import { isInvalidControl } from '../utils/app.util';
     DatePickerModule,
     TextareaModule,
     MessageModule,
+    PopoverModule,
+    ImageModule,
+    InputGroupModule,
+    InputGroupAddonModule,
   ],
-  templateUrl: './item-form.component.html',
-  styleUrl: './item-form.component.css',
 })
 export class ItemFormComponent implements OnInit {
   form!: FormGroup<ToFormGroup<ItemCreatePayload>>;
@@ -40,5 +47,18 @@ export class ItemFormComponent implements OnInit {
     this.form = this.controlContainer.control as FormGroup<
       ToFormGroup<ItemCreatePayload>
     >;
+  }
+
+  handleFileChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.form.get('file')?.setValue(file); 
+    }
+  }
+  
+  getFileUrl(): string | undefined {
+    const file = this.form.get('file')?.value;
+    return file instanceof Blob ? URL.createObjectURL(file) : file;
   }
 }

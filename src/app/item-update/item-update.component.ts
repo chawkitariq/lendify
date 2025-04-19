@@ -45,6 +45,7 @@ export class ItemUpdateComponent implements OnInit {
     }),
     description: new FormControl('', { nonNullable: true }),
     returnAt: new FormControl(undefined, { nonNullable: true }),
+    file: new FormControl(undefined, { nonNullable: true }),
   });
 
   ngOnInit(): void {

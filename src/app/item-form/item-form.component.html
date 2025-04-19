@@ -15,6 +15,7 @@
     />
     }
   </div>
+
   <div class="w-full" style="display: grid; gap: 0.5em">
     <label for="description">Description</label>
     <textarea
@@ -31,11 +32,37 @@
     />
     }
   </div>
+
   <div class="w-full" style="display: grid; gap: 0.5em">
-    <label for="returnAt">Date de retour</label>
+    <label for="file">Image</label>
+
+    <p-inputgroup>
+      <input
+        class="grow"
+        type="file"
+        id="title"
+        pInputText
+        (change)="handleFileChange($event)"
+      />
+
+      <p-inputgroup-addon class="w-1/12">
+        <!-- <p-image [src]="getFileUrl()" [preview]="true" alt="" /> -->
+      </p-inputgroup-addon>
+    </p-inputgroup>
+
+    @if (isInvalidControl(form.controls.file)) {
+    <p-message
+      severity="error"
+      [text]="getControlMessage(form.controls.file)"
+    />
+    }
+  </div>
+
+  <div class="w-full" style="display: grid; gap: 0.5em">
+    <label for="file">Date de retour</label>
     <p-datepicker
-      id="returnAt"
-      formControlName="returnAt"
+      id="file"
+      formControlName="file"
       [style]="{ width: '100%' }"
     />
     @if (isInvalidControl(form.controls.returnAt)) {
@@ -45,5 +72,6 @@
     />
     }
   </div>
+
   <p-button type="submit" [disabled]="!form.valid">Enregistrer</p-button>
 </div>
