@@ -32,6 +32,7 @@ import { extractApiErrorMessage } from '../utils/error.util';
 import { FileService } from '../file/file.service';
 import { File as ApiFile } from '../file/file.interface';
 import { constructAssetUrl } from '../utils/app.util';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-item-update',
@@ -58,7 +59,7 @@ export class ItemUpdateComponent implements OnInit {
     }),
     description: new FormControl('', { nonNullable: true }),
     returnAt: new FormControl(undefined, { nonNullable: true }),
-    file: new FormControl(undefined, { nonNullable: true }),
+    image: new FormControl(undefined, { nonNullable: true }),
   });
 
   ngOnInit(): void {
@@ -66,36 +67,46 @@ export class ItemUpdateComponent implements OnInit {
       this.item.set(data);
       this.form.patchValue({
         ...data,
-        file: constructAssetUrl(data.image),
+        image: constructAssetUrl(data.image),
       });
     });
   }
 
   handleFormSubmit() {
-    if (this.form.controls.file.value instanceof File) {
-      this.fileService
-        .upload({ file: this.form.controls.file.value })
-        .subscribe({
-          next: this.handleUploadFileSuccess,
-          error: this.handleUploadFileError,
-        });
-    }
-
-    this.itemService
-      .update(this.id, this.form.value as ItemUpdatePayload)
-      .subscribe({
+    this.handleUploadImage().subscribe((image) => {
+      const payload = { ...this.form.value, image: image };
+      this.itemService.update(this.id, payload).subscribe({
         next: this.handleUpdateItemSuccess,
         error: this.handleUpdateItemError,
       });
-  }
-
-  handleUploadFileSuccess({ data }: ApiResponse<ApiFile>) {
-    this.form.patchValue({
-      file: data.id,
     });
   }
 
-  handleUploadFileError({ error }: HttpClientErrorResponse<ApiErrorResponse>) {
+  handleUploadImage() {
+    const image = this.form.controls.image.value;
+
+    return new Observable<string | undefined>((subscriber) => {
+      if (image instanceof File) {
+        this.fileService.upload({ file: image }).subscribe({
+          next: ({ data }) => {
+            this.handleUploadImageSuccess(data);
+            subscriber.next(data.id);
+          },
+          error: this.handleUploadImageError,
+        });
+      } else {
+        subscriber.next(undefined);
+      }
+    });
+  }
+
+  handleUploadImageSuccess(image: ApiFile) {
+    this.form.patchValue({
+      image: constructAssetUrl(image.id),
+    });
+  }
+
+  handleUploadImageError({ error }: HttpClientErrorResponse<ApiErrorResponse>) {
     this.messageService.add({
       severity: 'error',
       summary: "Échec de l'upload",
@@ -108,7 +119,7 @@ export class ItemUpdateComponent implements OnInit {
     this.item.set(data);
     this.form.patchValue({
       ...data,
-      file: `${environment.apiUrl}/assets/${data.image}`,
+      image: `${environment.apiUrl}/assets/${data.image}`,
     });
     this.messageService.add({
       severity: 'success',

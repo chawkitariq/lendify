@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ItemCreatePayload,
   ItemFormCreatePayload,
   ItemFormUpdatePayload,
 } from '../item/item.interface';
@@ -56,13 +55,13 @@ export class ItemFormComponent implements OnInit {
   handleFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.form.get('file')?.setValue(file);
+      const image = input.files[0];
+      this.form.controls.image.setValue(image);
     }
   }
 
-  getFileUrl(): string | undefined {
-    const file = this.form.get('file')?.value;
-    return file instanceof Blob ? URL.createObjectURL(file) : file;
+  getImageUrl(): string | undefined {
+    const image = this.form.controls.image.value;
+    return image instanceof File ? URL.createObjectURL(image) : image;
   }
 }

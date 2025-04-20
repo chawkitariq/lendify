@@ -34,7 +34,7 @@
   </div>
 
   <div class="w-full" style="display: grid; gap: 0.5em">
-    <label for="file">Image</label>
+    <label for="image">Image</label>
 
     <p-inputgroup>
       <input
@@ -46,23 +46,23 @@
       />
 
       <p-inputgroup-addon class="w-1/12">
-        <p-image [src]="getFileUrl()" [preview]="true" alt="" />
+        <p-image [src]="getImageUrl()" alt="Preview of image" [preview]="true" />
       </p-inputgroup-addon>
     </p-inputgroup>
 
-    @if (isInvalidControl(form.controls.file)) {
+    @if (isInvalidControl(form.controls.image)) {
     <p-message
       severity="error"
-      [text]="getControlMessage(form.controls.file)"
+      [text]="getControlMessage(form.controls.image)"
     />
     }
   </div>
 
   <div class="w-full" style="display: grid; gap: 0.5em">
-    <label for="file">Date de retour</label>
+    <label for="image">Date de retour</label>
     <p-datepicker
-      id="file"
-      formControlName="file"
+      id="image"
+      formControlName="image"
       [style]="{ width: '100%' }"
     />
     @if (isInvalidControl(form.controls.returnAt)) {
