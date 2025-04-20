@@ -21,6 +21,8 @@ Access the application at http://localhost:4200 and the backend dashboard at htt
 - Email: `admin@email.com`
 - Password: `password`
 
+<video controls src="Enregistrement de l'écran 2025-04-20 220906.mp4" title="Title"></video>
+
 ### Stop application
 
 ```bash
