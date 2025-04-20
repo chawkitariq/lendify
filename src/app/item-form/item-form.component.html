@@ -46,7 +46,11 @@
       />
 
       <p-inputgroup-addon class="w-1/12">
-        <p-image [src]="getImageUrl()" alt="Preview of image" [preview]="true" />
+        <p-image
+          [src]="getImageUrl()"
+          alt="Preview of image"
+          [preview]="true"
+        />
       </p-inputgroup-addon>
     </p-inputgroup>
 
@@ -60,11 +64,7 @@
 
   <div class="w-full" style="display: grid; gap: 0.5em">
     <label for="image">Date de retour</label>
-    <p-datepicker
-      id="image"
-      formControlName="image"
-      [style]="{ width: '100%' }"
-    />
+    <p-datepicker id="image" formControlName="image" styleClass="w-full" />
     @if (isInvalidControl(form.controls.returnAt)) {
     <p-message
       severity="error"

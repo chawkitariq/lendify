@@ -6,11 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import {
-  Item,
-  ItemCreatePayload,
-  ItemFormCreatePayload,
-} from '../item/item.interface';
+import { Item, ItemFormCreatePayload } from '../item/item.interface';
 import { Router } from '@angular/router';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { setAsyncControlMessage, setControlMessage } from 'ngx-control-message';
@@ -22,7 +18,6 @@ import {
 } from '../app.type';
 import { itemTitleExistsValidator } from '../validators/item-title-exists.validator';
 import { extractApiErrorMessage } from '../utils/error.util';
-import { environment } from '../../environments/environment';
 import { constructAssetUrl } from '../utils/app.util';
 import { FileService } from '../file/file.service';
 import { MessageService } from 'primeng/api';
@@ -77,9 +72,9 @@ export class ItemCreateComponent {
     return new Observable<string | undefined>((subscriber) => {
       if (image instanceof File) {
         this.fileService.upload({ file: image }).subscribe({
-          next: ({ data }) => {
-            this.handleUploadImageSuccess(data);
-            subscriber.next(data.id);
+          next: (response) => {
+            this.handleUploadImageSuccess(response);
+            subscriber.next(response.data.id);
           },
           error: this.handleUploadImageError,
         });
@@ -89,7 +84,7 @@ export class ItemCreateComponent {
     });
   }
 
-  handleUploadImageSuccess(image: ApiFile) {
+  handleUploadImageSuccess({ data: image }: ApiResponse<ApiFile>) {
     this.form.patchValue({
       image: constructAssetUrl(image.id),
     });

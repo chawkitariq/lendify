@@ -12,10 +12,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemService } from '../item/item.service';
-import {
-  Item,
-  ItemFormUpdatePayload,
-} from '../item/item.interface';
+import { Item, ItemFormUpdatePayload } from '../item/item.interface';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { setControlMessage } from 'ngx-control-message';
 import { MessageService } from 'primeng/api';
@@ -87,9 +84,9 @@ export class ItemUpdateComponent implements OnInit {
     return new Observable<string | undefined>((subscriber) => {
       if (image instanceof File) {
         this.fileService.upload({ file: image }).subscribe({
-          next: ({ data }) => {
-            this.handleUploadImageSuccess(data);
-            subscriber.next(data.id);
+          next: (response) => {
+            this.handleUploadImageSuccess(response);
+            subscriber.next(response.data.id);
           },
           error: this.handleUploadImageError,
         });
@@ -99,7 +96,7 @@ export class ItemUpdateComponent implements OnInit {
     });
   }
 
-  handleUploadImageSuccess(image: ApiFile) {
+  handleUploadImageSuccess({ data: image }: ApiResponse<ApiFile>) {
     this.form.patchValue({
       image: constructAssetUrl(image.id),
     });
@@ -118,7 +115,7 @@ export class ItemUpdateComponent implements OnInit {
     this.item.set(data);
     this.form.patchValue({
       ...data,
-      image: `${environment.apiUrl}/assets/${data.image}`,
+      image: constructAssetUrl(data.image),
     });
     this.messageService.add({
       severity: 'success',
