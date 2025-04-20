@@ -23,7 +23,7 @@ Access the application at http://localhost:4200 and the backend dashboard at htt
 
 Please follow the same steps in the videos: [snapshot-video.mp4](./snapshot-video.mp4)
 
-<video controls src="Enregistrement de l'écran 2025-04-20 220906.mp4" title="Title"></video>
+<video controls src="./snapshot-video.mp4" title="Title"></video>
 
 ### Stop application
 
