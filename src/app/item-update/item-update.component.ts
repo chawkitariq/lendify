@@ -15,7 +15,6 @@ import { ItemService } from '../item/item.service';
 import {
   Item,
   ItemFormUpdatePayload,
-  ItemUpdatePayload,
 } from '../item/item.interface';
 import { ItemFormComponent } from '../item-form/item-form.component';
 import { setControlMessage } from 'ngx-control-message';
