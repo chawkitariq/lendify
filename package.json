@@ -23,7 +23,7 @@
     "@tailwindcss/postcss": "^4.1.3",
     "@types/node": "^22.14.0",
     "date-fns": "^4.1.0",
-    "ngx-control-message": "^1.0.0",
+    "ngx-control-message": "^1.1.0",
     "postcss": "^8.5.3",
     "primeng": "^19.0.10",
     "rxjs": "~7.8.0",
