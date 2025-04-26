@@ -1,20 +1,4 @@
 services:
-  database:
-    image: postgis/postgis:13-master
-    volumes:
-      - database:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: ${DB_DATABASE}
-      POSTGRES_PASSWORD: ${DB_USER}
-      POSTGRES_DB: ${DB_PASSWORD}
-    healthcheck:
-      test: ["CMD", "pg_isready", "--host=localhost", "--username=directus"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_interval: 5s
-      start_period: 30s
-
   cache:
     image: redis:6
     healthcheck:
@@ -41,20 +25,22 @@ services:
         condition: service_healthy
     env_file:
       - ./env
-  
+      
   app:
     image: node:23-slim
     working_dir: /app
     volumes:
-      - ./:/app
+      - app:/app
     ports:
       - 4200:4200
-    command: ["sh", "-c", "npm install --legacy-peer-deps && npm run start:docker"]
+    command: ["sh", "-c", "npm install --force && npm run build && npm run start:docker"]
     restart: unless-stopped
     depends_on:
       - directus
 
 volumes:
+  app:
+  directus:
   database:
   uploads:
   extensions:
