@@ -12,8 +12,8 @@ services:
   directus:
     image: directus/directus:11.5.1
     ports:
-      - 80:8055
-      - 443:8055
+      - 80:${PORT:-8055}
+      - 443:${PORT:-8055}
     volumes:
       - uploads:/directus/uploads
       - extensions:/directus/extensions
