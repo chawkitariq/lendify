@@ -12,7 +12,8 @@ services:
   directus:
     image: directus/directus:11.5.1
     ports:
-      - 8055:8055
+      - 80:8055
+      - 443:8055
     volumes:
       - uploads:/directus/uploads
       - extensions:/directus/extensions
@@ -25,22 +26,7 @@ services:
         condition: service_healthy
     env_file:
       - ./env
-      
-  app:
-    image: node:23-slim
-    working_dir: /app
-    volumes:
-      - app:/app
-    ports:
-      - 4200:4200
-    command: ["sh", "-c", "npm install --force && npm run build && npm run start:docker"]
-    restart: unless-stopped
-    depends_on:
-      - directus
 
 volumes:
-  app:
-  directus:
-  database:
   uploads:
   extensions:
